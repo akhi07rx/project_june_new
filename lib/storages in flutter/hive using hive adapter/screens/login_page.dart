@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:project_june1/storages%20in%20flutter/hive%20using%20hive%20adapter/screens/RegistrationPAge.dart';
 
