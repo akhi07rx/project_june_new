@@ -12,6 +12,9 @@ class User {
   @HiveField(2)
   String? id;
 
+  // @HiveField(3)
+  // final String name,
+
   User({required this.email, required this.password}) {
     id = DateTime.now().microsecondsSinceEpoch.toString();
   }
