@@ -11,7 +11,7 @@ class ProductModel {
   String? title;
   double? price;
   String? description;
-  Category? category;
+  String? category;
   String? image;
   Rating? rating;
 
@@ -46,14 +46,14 @@ class ProductModel {
       };
 }
 
-enum Category { ELECTRONICS, JEWELERY, MEN_S_CLOTHING, WOMEN_S_CLOTHING }
+// enum Category { ELECTRONICS, JEWELERY, MEN_S_CLOTHING, WOMEN_S_CLOTHING }
 
-final categoryValues = EnumValues({
-  "electronics": Category.ELECTRONICS,
-  "jewelery": Category.JEWELERY,
-  "men's clothing": Category.MEN_S_CLOTHING,
-  "women's clothing": Category.WOMEN_S_CLOTHING
-});
+// final categoryValues = EnumValues({
+//   "electronics": Category.ELECTRONICS,
+//   "jewelery": Category.JEWELERY,
+//   "men's clothing": Category.MEN_S_CLOTHING,
+//   "women's clothing": Category.WOMEN_S_CLOTHING
+// });
 
 class Rating {
   double? rate;
