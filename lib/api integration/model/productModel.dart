@@ -30,7 +30,7 @@ class ProductModel {
         title: json["title"],
         price: json["price"]?.toDouble(),
         description: json["description"],
-        category: categoryValues.map[json["category"]]!,
+        category: json["category"]!,
         image: json["image"],
         rating: json["rating"] == null ? null : Rating.fromJson(json["rating"]),
       );
@@ -40,7 +40,7 @@ class ProductModel {
         "title": title,
         "price": price,
         "description": description,
-        "category": categoryValues.reverse[category],
+        "category": category,
         "image": image,
         "rating": rating?.toJson(),
       };
