@@ -15,7 +15,16 @@ class ProductHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Products"),),
-      body: SizedBox(),
+      body: SizedBox(child: Obx((){
+        if(productController.isLoading.value){
+          return const Center(child: CircularProgressIndicator(),);
+    }
+        else{
+          return GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), itemBuilder: (context,index){
+            return ProductTile(productController.productList[index]);
+    })
+    }
+    }),
     );
   }
 }
