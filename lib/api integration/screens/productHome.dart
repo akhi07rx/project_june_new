@@ -9,7 +9,7 @@ void main() {
 }
 
 class ProductHome extends StatelessWidget {
-  final ProductController productController = Get.put();
+  final ProductController productController = Get.put(ProductController());
 
   @override
   Widget build(BuildContext context) {
