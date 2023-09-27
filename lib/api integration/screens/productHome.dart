@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:project_june1/api%20integration/controller/productcontroller.dart';
 
 void main() {
-  runApp(MaterialApp(
+  runApp(GetMaterialApp(
     home: ProductHome(),
   ));
 }
@@ -13,6 +13,9 @@ class ProductHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(title: Text("Products"),),
+      body: SizedBox(),
+    );
   }
 }
