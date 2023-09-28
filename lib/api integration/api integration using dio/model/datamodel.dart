@@ -23,19 +23,10 @@ class DataModel {
     this.body,
   });
 
-  factory DataModel.fromJson(Map<String, dynamic> json) =>
-      DataModel(
-        userId: json["userId"],
-        id: json["id"],
-        title: json["title"],
-        body: json["body"],
-      );
-
-  Map<String, dynamic> toJson() =>
-      {
-        "userId" = [userId];
-        "id" = [id];
-        "title" = [title];
-        "body" = [body];
-      };
+  DataModel.fromJson(Map<String, dynamic> json) {
+    userId = json["userId"];
+    id = json["id"];
+    title = json["title"];
+    body = json["body"];
+  }
 }
