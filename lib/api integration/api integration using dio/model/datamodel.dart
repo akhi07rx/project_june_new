@@ -4,9 +4,11 @@
 
 import 'dart:convert';
 
-List<DataModel> dataModelFromJson(String str) => List<DataModel>.from(json.decode(str).map((x) => DataModel.fromJson(x)));
+List<DataModel> dataModelFromJson(String str) =>
+    List<DataModel>.from(json.decode(str).map((x) => DataModel.fromJson(x)));
 
-String dataModelToJson(List<DataModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String dataModelToJson(List<DataModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class DataModel {
   int? userId;
@@ -21,17 +23,19 @@ class DataModel {
     this.body,
   });
 
-  factory DataModel.fromJson(Map<String, dynamic> json) => DataModel(
-    userId: json["userId"],
-    id: json["id"],
-    title: json["title"],
-    body: json["body"],
-  );
+  factory DataModel.fromJson(Map<String, dynamic> json) =>
+      DataModel(
+        userId: json["userId"],
+        id: json["id"],
+        title: json["title"],
+        body: json["body"],
+      );
 
-  Map<String, dynamic> toJson() => {
-    "userId": userId,
-    "id": id,
-    "title": title,
-    "body": body,
-  };
+  Map<String, dynamic> toJson() =>
+      {
+        "userId" = [userId];
+        "id" = [id];
+        "title" = [title];
+        "body" = [body];
+      };
 }
