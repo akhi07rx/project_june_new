@@ -58,6 +58,8 @@ dependencies:
   #api integration using dio:
   dio: ^5.3.3
   scrollable_positioned_list:
+  internet_connection_checker:
+  top_snackbar_flutter:
   #get
   #lottie
   #font_awesome_flutter
