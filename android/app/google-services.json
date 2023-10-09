@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "407719978485",
-    "project_id": "project-firebase-82287",
-    "storage_bucket": "project-firebase-82287.appspot.com"
+    "project_number": "449474307463",
+    "project_id": "project-june-398208",
+    "storage_bucket": "project-june-398208.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:407719978485:android:5107349097ebc352912cbc",
+        "mobilesdk_app_id": "1:449474307463:android:c7edd9a6607ad1240edf22",
         "android_client_info": {
           "package_name": "com.luminar.project_june1"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDdjm6I9m4P-9NrpIxp13JkAH1OxA8TNVo"
+          "current_key": "AIzaSyA4EXa4My5mFXw2SeGac3k28Np8fW9rTgc"
         }
       ],
       "services": {

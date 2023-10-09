@@ -5,10 +5,11 @@ class FirebaseHelper {
 
   get user => auth.currentUser;
 
-  Future<String?> register({required String useremail, required String password}) async {
+  //Signup
+  Future<String?> signUp({required String email, required String password}) async {
     try {
       await auth.createUserWithEmailAndPassword(
-        email: useremail,
+        email: email,
         password: password,
       );
       return null;
@@ -16,16 +17,20 @@ class FirebaseHelper {
       return e.message;
     }
   }
-
-  Future<String?> login({required String email, required String password}) async{
+  //SignIn
+  Future<String?> signIn({required String email, required String password}) async {
     try {
       await auth.signInWithEmailAndPassword(
           email: email,
-          password: password
-      );
+          password: password);
       return null;
     } on FirebaseAuthException catch (e) {
       return e.message;
     }
+  }
+
+  //Sign
+  Future<void> signOut() async{
+    await auth.signOut();
   }
 }
