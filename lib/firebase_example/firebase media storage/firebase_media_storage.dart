@@ -38,12 +38,13 @@ Widget build(BuildContext context) {
   );
 }
 
-Future<void> upload(String ImageSource) async {
+Future<void> upload(String imageSource) async {
   final picker = ImagePicker();
   XFile? pickedImage;
 
   try {
     pickedImage = await picker.pickImage(source: imageSource == 'camera' ?
-    )
+    ImageSource.camera : ImageSource.gallery,maxWidth:1920
+    );
   }
 }}
