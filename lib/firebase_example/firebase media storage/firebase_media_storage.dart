@@ -56,7 +56,16 @@ Future<void> upload(String imageSource) async {
     File imagefile = File(pickedImage.path)
 
     try {
-
+      await storage.ref(fileName).putFile(
+          imagefile, SettableMetadata(customMetadata: {
+        'UploadedBy': "Its ME XXXX",
+        'Description': "Some Description"
+      })
+      );
+      setState(() {});
+    }
+    on FirebaseException catch (error) {
+      print(error)
     }
   }
 }}
