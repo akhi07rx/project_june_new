@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class FirebaseMediaStorage extends StatefulWidget {
 
@@ -38,5 +39,11 @@ Widget build(BuildContext context) {
 }
 
 Future<void> upload(String ImageSource) async {
-  final picker = ImagePicker()
+  final picker = ImagePicker();
+  XFile? pickedImage;
+
+  try {
+    pickedImage = await picker.pickImage(source: imageSource == 'camera' ?
+    )
+  }
 }}
