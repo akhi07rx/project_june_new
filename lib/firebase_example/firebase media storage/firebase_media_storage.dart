@@ -22,11 +22,11 @@ Widget build(BuildContext context) {
         children: [Row(
           children: [
             ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: ()=> upload('camera'),
                 icon: (Icons.camera_alt_outlined),
                 label: Text("Camera")),
             ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: ()=> upload('camera'),
                 icon: (Icons.photo),
                 label: Text("Gallery")),
           ],
@@ -35,4 +35,7 @@ Widget build(BuildContext context) {
       ),
     ),
   );
-}}
+}
+
+
+}
