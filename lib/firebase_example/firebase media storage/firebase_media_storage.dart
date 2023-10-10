@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
@@ -15,6 +16,8 @@ class FirebaseMediaStorage extends StatefulWidget {
 
 class _FirebaseMediaStorage
 State extends State<FirebaseMediaStorage> {
+
+FirebaseStorage storage = FirebaseStorage.instance;
 
 @override
 Widget build(BuildContext context) {
@@ -51,5 +54,9 @@ Future<void> upload(String imageSource) async {
     );
     final String filename = path.basename(pickedImage!.path);
     File imagefile = File(pickedImage.path)
+
+    try {
+
+    }
   }
 }}
