@@ -22,11 +22,11 @@ Widget build(BuildContext context) {
         children: [Row(
           children: [
             ElevatedButton.icon(
-                onPressed: ()=> upload('camera'),
+                onPressed: () => upload('camera'),
                 icon: (Icons.camera_alt_outlined),
                 label: Text("Camera")),
             ElevatedButton.icon(
-                onPressed: ()=> upload('camera'),
+                onPressed: () => upload('camera'),
                 icon: (Icons.photo),
                 label: Text("Gallery")),
           ],
@@ -37,5 +37,6 @@ Widget build(BuildContext context) {
   );
 }
 
-
-}
+Future<void> upload(String ImageSource) async {
+  final picker = ImagePicker()
+}}
