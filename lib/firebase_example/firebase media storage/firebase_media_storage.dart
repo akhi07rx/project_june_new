@@ -55,21 +55,15 @@ class _FireMediaStorageState extends State<FireMediaStorage> {
             ),
             Expanded(
                 child: FutureBuilder(
-                  // If firebase connection is success load data or media from firebase
-                  future: LoadMedia(),
-                  builder: (context,
-                      AsyncSnapshot<List<Map<String, dynamic>>>snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      return ListView.builder(itemBuilder: (context, index) {
-
-                      });
-                    }
-                  },
-
-
-
-
-                ))
+              // If firebase connection is success load data or media from firebase
+              future: LoadMedia(),
+              builder: (context,
+                  AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return ListView.builder(itemBuilder: (itemCount: snapshot.data?.length??0, index) {});
+                }
+              },
+            ))
           ],
         ),
       ),
