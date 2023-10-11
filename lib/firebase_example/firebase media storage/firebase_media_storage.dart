@@ -138,5 +138,8 @@ class _FireMediaStorageState extends State<FireMediaStorage> {
     return images;
   }
 
-  deleteMedia(image) {}
+  Future<void> deleteMedia(String imagepath) async {
+    await storage.ref().delete();
+    setState(() {});
+  }
 }
