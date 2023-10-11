@@ -107,8 +107,8 @@ class _FireMediaStorageState extends State<FireMediaStorage> {
     final List<Reference> allfiles = result.items;
     await Future.forEach(allfiles, (singlefile) async {
       final String fileurl = await singlefile
-          .getDownloadURL(); // to fetch image path
-      final FullMetadata metadata = await singlefile.getMetadata();
+          .getDownloadURL(); // to fetch image path (path as network image path)
+      final FullMetadata metadata = await singlefile.getMetadata(); // to fetch metadata from firebase
     })
   }
 }
