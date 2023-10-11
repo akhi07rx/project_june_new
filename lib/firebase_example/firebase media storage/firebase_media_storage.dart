@@ -64,11 +64,16 @@ class _FireMediaStorageState extends State<FireMediaStorage> {
                       return ListView.builder(
                           itemCount: snapshot.data?.length ?? 0,
                           itemBuilder: (context, index) {
-                            final Map<String, dynamic> images = snapshot
+                            final Map<String, dynamic> image = snapshot
                                 .data![index];
                             return Card(
                               child: ListTile(
-                                leading: Image.network(images['url']),
+                                leading: Image.network(image['url']),
+                                title: Text(image['uploadedby']),
+                                subtitle: Text(image['description']),
+                                trailing: IconButton(
+                                    onPressed: () => deleteMedia(image['path']),
+                                    icon: Icon(Icons.delete)),
                               ),
                             )
                           });
@@ -129,4 +134,6 @@ class _FireMediaStorageState extends State<FireMediaStorage> {
     });
     return images;
   }
+
+  deleteMedia(image) {}
 }
