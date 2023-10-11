@@ -56,17 +56,25 @@ class _FireMediaStorageState extends State<FireMediaStorage> {
             ),
             Expanded(
                 child: FutureBuilder(
-              // If firebase connection is success load data or media from firebase
-              future: LoadMedia(),
-              builder: (context,
-                  AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  return ListView.builder(
-                      itemCount: snapshot.data?.length ?? 0,
-                      itemBuilder: (context, index) {});
-                }
-              },
-            ))
+                  // If firebase connection is success load data or media from firebase
+                  future: LoadMedia(),
+                  builder: (context,
+                      AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return ListView.builder(
+                          itemCount: snapshot.data?.length ?? 0,
+                          itemBuilder: (context, index) {
+                            final Map<String, dynamic> images = snapshot
+                                .data![index];
+                            return Card(
+                              child: ListTile(
+                                leading: Image.network(images['url']),
+                              ),
+                            )
+                          });
+                    }
+                  },
+                ))
           ],
         ),
       ),
@@ -109,14 +117,14 @@ class _FireMediaStorageState extends State<FireMediaStorage> {
       final String fileurl = await singlefile
           .getDownloadURL(); // to fetch image path (path as network image path)
       final FullMetadata metadata =
-          await singlefile.getMetadata(); // to fetch metadata from firebase
+      await singlefile.getMetadata(); // to fetch metadata from firebase
 
       images.add({
         'imageurl': fileurl,
         'path': singlefile.fullPath,
         'uploaded by': metadata.customMetadata?['uploadedby'] ?? 'No Data',
         'description':
-            metadata.customMetadata?['description'] ?? 'No Description'
+        metadata.customMetadata?['description'] ?? 'No Description'
       });
     });
     return images;
