@@ -78,6 +78,7 @@ class _FireMediaStorageState extends State<FireMediaStorage> {
                             )
                           });
                     }
+                    return const Center(child: CircularProgressIndicator(),);
                   },
                 ))
           ],
