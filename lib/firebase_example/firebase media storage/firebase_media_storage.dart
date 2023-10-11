@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
+import 'package:rive/rive.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,17 +56,17 @@ class _FireMediaStorageState extends State<FireMediaStorage> {
             ),
             Expanded(
                 child: FutureBuilder(
-              // If firebase connection is success load data or media from firebase
-              future: LoadMedia(),
-              builder: (context,
-                  AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  return ListView.builder(
-                      itemCount: snapshot.data?.length ?? 0,
-                      itemBuilder: (context, index) {});
-                }
-              },
-            ))
+                  // If firebase connection is success load data or media from firebase
+                  future: LoadMedia(),
+                  builder: (context,
+                      AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return ListView.builder(
+                          itemCount: snapshot.data?.length ?? 0,
+                          itemBuilder: (context, index) {});
+                    }
+                  },
+                ))
           ],
         ),
       ),
@@ -88,8 +89,8 @@ class _FireMediaStorageState extends State<FireMediaStorage> {
         await storage.ref(filename).putFile(
             imagefile,
             SettableMetadata(customMetadata: {
-              'uploaded by': 'its me xxxx',
-              'description': 'some description'
+              'Uploaded by': 'Its me XXXX',
+              'Description': 'Some description'
             }));
         setState(() {});
       } on FirebaseException catch (error) {
@@ -100,8 +101,14 @@ class _FireMediaStorageState extends State<FireMediaStorage> {
     }
   }
 
-  Future<List<Map<String,dynamic>>>LoadMedia() async{
-    List<Map<String,dynamic>> images = [];
+  Future<List<Map<String, dynamic>>> LoadMedia() async {
+    List<Map<String, dynamic>> images = [];
     final ListResult result = await storage.ref().list();
+    final List<Reference> allfiles = result.items;
+    await Future.forEach(allfiles, (singlefile) async {
+      final String fileurl = await singlefile
+          .getDownloadURL(); // to fetch image path
+      final FullMetadata metadata = await singlefile.getMetadata();
+    })
   }
 }
