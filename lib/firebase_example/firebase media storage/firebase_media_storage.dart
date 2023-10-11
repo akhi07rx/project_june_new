@@ -9,79 +9,81 @@ import 'package:path/path.dart' as path;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: const FirebaseOptions(
-        apiKey: "AIzaSyA4EXa4My5mFXw2SeGac3k28Np8fW9rTgc",
-        projectId: "project-june-398208",
-        appId: '1:449474307463:android:c7edd9a6607ad1240edf22',
-        messagingSenderId: '',
-        storageBucket: "project-june-398208.appspot.com"),
-  );
+      options: const FirebaseOptions(
+    apiKey: "AIzaSyDiq7-WCnuL3BMWaydX34c4y3S2dKEN9qc",
+    projectId: "famous-smithy-394706",
+    appId: '1:228270350036:android:9b5491946414627eb5e541',
+    messagingSenderId: '',
+    storageBucket: "famous-smithy-394706.appspot.com",
+  ));
   runApp(MaterialApp(
     home: FireMediaStorage(),
   ));
 }
 
 class FireMediaStorage extends StatefulWidget {
-  const FireMediaStorage({super.key});
-
   @override
-  State<FireMediaStorage> createState() => _FireMediaStorageState();
+  State<StatefulWidget> createState() => _FireMediaStorageState();
 }
 
-class _FireMediaStorageState extends State<FireMediaStorage> {
+class _FireMediaStorageState extends State {
   FirebaseStorage storage = FirebaseStorage.instance;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('FireBase Storage'),
+        title: const Text("Store Media"),
       ),
       body: Padding(
-        padding: EdgeInsets.all(15),
+        padding: const EdgeInsets.all(15),
         child: Column(
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton.icon(
                     onPressed: () => upload('camera'),
-                    icon: Icon(Icons.camera_alt_rounded),
-                    label: Text('Camera')),
+                    icon: const Icon(Icons.camera_alt_outlined),
+                    label: const Text("Camera")),
                 ElevatedButton.icon(
                     onPressed: () => upload('gallery'),
-                    icon: Icon(Icons.photo_album),
-                    label: Text('Gallery')),
+                    icon: const Icon(Icons.photo),
+                    label: const Text("Gallery"))
               ],
             ),
             Expanded(
                 child: FutureBuilder(
-              // If firebase connection is success load data or media from firebase
-              future: LoadMedia(),
-              builder: (context,
-                  AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  return ListView.builder(
-                      itemCount: snapshot.data?.length ?? 0,
-                      itemBuilder: (context, index) {
-                        final Map<String, dynamic> image =
-                            snapshot.data![index];
-                        return Card(
-                          child: ListTile(
-                            leading: Image.network(image['url']),
-                            title: Text(image['uploadedby']),
-                            subtitle: Text(image['description']),
-                            trailing: IconButton(
-                                onPressed: () => deleteMedia(image['path']),
-                                icon: Icon(Icons.delete)),
-                          ),
-                        );
-                      });
-                }
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
-            ))
+                    // if firebase connection is success load data or media from firebase
+                    future: loadMedia(),
+
+                    /// list of map images will be return here
+                    builder: (context,
+                        AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return ListView.builder(
+                            itemCount: snapshot.data?.length ?? 0,
+                            itemBuilder: (context, index) {
+                              /// each map value from list images stored in map image
+                              final Map<String, dynamic> image =
+                                  snapshot.data![index];
+                              return Card(
+                                child: ListTile(
+                                  leading: Image.network(image['imageurl']),
+                                  title: Text(image['uploadedBy']),
+                                  subtitle: Text(image['description']),
+                                  trailing: IconButton(
+                                      onPressed: () =>
+                                          deleteMedia(image['path']),
+                                      icon: Icon(Icons.delete)),
+                                ),
+                              );
+                            });
+                      }
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }))
           ],
         ),
       ),
@@ -98,16 +100,16 @@ class _FireMediaStorageState extends State<FireMediaStorage> {
               ? ImageSource.camera
               : ImageSource.gallery,
           maxWidth: 1920);
-      final String filename = path.basename(pickedImage!.path);
-      File imagefile = File(pickedImage.path);
+      final String fileName = path.basename(pickedImage!.path);
+      File imagefile = File(pickedImage.path); // import dart.io;
       try {
-        await storage.ref(filename).putFile(
+        await storage.ref(fileName).putFile(
             imagefile,
             SettableMetadata(customMetadata: {
-              'Uploaded by': 'Its me XXXX',
-              'Description': 'Some description'
+              'uploadedBy': "Its Me Xxxx",
+              'description': "Some Description"
             }));
-        setState(() {});
+        setState(() {}); // refresh ui
       } on FirebaseException catch (error) {
         print(error);
       }
@@ -116,20 +118,22 @@ class _FireMediaStorageState extends State<FireMediaStorage> {
     }
   }
 
-  Future<List<Map<String, dynamic>>> LoadMedia() async {
+  Future<List<Map<String, dynamic>>> loadMedia() async {
     List<Map<String, dynamic>> images = [];
     final ListResult result = await storage.ref().list();
-    final List<Reference> allfiles = result.items;
+    final List<Reference> allfiles =
+        result.items; // all the data from firebase stored as a reference
+
     await Future.forEach(allfiles, (singlefile) async {
-      final String fileurl = await singlefile
-          .getDownloadURL(); // to fetch image path (path as network image path)
+      final String fileUrl = await singlefile
+          .getDownloadURL(); // to fetch image path(path as network image path)
       final FullMetadata metadata =
           await singlefile.getMetadata(); // to fetch metadata from firebase
 
       images.add({
-        'imageurl': fileurl,
+        'imageurl': fileUrl,
         'path': singlefile.fullPath,
-        'uploaded by': metadata.customMetadata?['uploadedby'] ?? 'No Data',
+        'uploadedBy': metadata.customMetadata?['uploadedBy'] ?? 'No Data',
         'description':
             metadata.customMetadata?['description'] ?? 'No Description'
       });
@@ -138,7 +142,7 @@ class _FireMediaStorageState extends State<FireMediaStorage> {
   }
 
   Future<void> deleteMedia(String imagepath) async {
-    await storage.ref().delete();
+    await storage.ref(imagepath).delete();
     setState(() {});
   }
 }
