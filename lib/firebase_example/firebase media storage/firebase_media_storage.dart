@@ -9,16 +9,17 @@ import 'package:path/path.dart' as path;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-      options: const FirebaseOptions(
-    apiKey: "AIzaSyDiq7-WCnuL3BMWaydX34c4y3S2dKEN9qc",
-    projectId: "famous-smithy-394706",
-    appId: '1:228270350036:android:9b5491946414627eb5e541',
-    messagingSenderId: '',
-    storageBucket: "famous-smithy-394706.appspot.com",
-  ));
+    options: const FirebaseOptions(
+        apiKey: "AIzaSyA4EXa4My5mFXw2SeGac3k28Np8fW9rTgc",
+        projectId: "project-june-398208",
+        appId: '1:449474307463:android:c7edd9a6607ad1240edf22',
+        messagingSenderId: '',
+        storageBucket: "project-june-398208.appspot.com"),
+  );
   runApp(MaterialApp(
-    home: FireMediaStorage(),
-  ));
+  home: FireMediaStorage(),
+  )
+  );
 }
 
 class FireMediaStorage extends StatefulWidget {
@@ -54,7 +55,7 @@ class _FireMediaStorageState extends State {
             ),
             Expanded(
                 child: FutureBuilder(
-                    // if firebase connection is success load data or media from firebase
+                  // if firebase connection is success load data or media from firebase
                     future: loadMedia(),
 
                     /// list of map images will be return here
@@ -66,7 +67,7 @@ class _FireMediaStorageState extends State {
                             itemBuilder: (context, index) {
                               /// each map value from list images stored in map image
                               final Map<String, dynamic> image =
-                                  snapshot.data![index];
+                              snapshot.data![index];
                               return Card(
                                 child: ListTile(
                                   leading: Image.network(image['imageurl']),
@@ -128,14 +129,14 @@ class _FireMediaStorageState extends State {
       final String fileUrl = await singlefile
           .getDownloadURL(); // to fetch image path(path as network image path)
       final FullMetadata metadata =
-          await singlefile.getMetadata(); // to fetch metadata from firebase
+      await singlefile.getMetadata(); // to fetch metadata from firebase
 
       images.add({
         'imageurl': fileUrl,
         'path': singlefile.fullPath,
         'uploadedBy': metadata.customMetadata?['uploadedBy'] ?? 'No Data',
         'description':
-            metadata.customMetadata?['description'] ?? 'No Description'
+        metadata.customMetadata?['description'] ?? 'No Description'
       });
     });
     return images;
