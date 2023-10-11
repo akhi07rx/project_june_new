@@ -55,11 +55,8 @@ class _FireMediaStorageState extends State<FireMediaStorage> {
             ),
             Expanded(
                 child: FutureBuilder(
-              future: future,
+              future: LoadMedia(),
               builder: builder,
-
-
-
             ))
           ],
         ),
