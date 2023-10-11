@@ -52,7 +52,12 @@ class _FireMediaStorageState extends State<FireMediaStorage> {
                     icon: Icon(Icons.photo_album),
                     label: Text('Gallery')),
               ],
-            )
+            ),
+            Expanded(
+                child: FutureBuilder(
+              future: future,
+              builder: builder,
+            ))
           ],
         ),
       ),
