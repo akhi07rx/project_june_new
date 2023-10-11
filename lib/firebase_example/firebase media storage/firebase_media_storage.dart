@@ -55,6 +55,7 @@ class _FireMediaStorageState extends State<FireMediaStorage> {
             ),
             Expanded(
                 child: FutureBuilder(
+                  // If firebase connection is success load data or
               future: LoadMedia(),
               builder: builder,
             ))
