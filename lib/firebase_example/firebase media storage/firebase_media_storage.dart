@@ -100,5 +100,5 @@ class _FireMediaStorageState extends State<FireMediaStorage> {
     }
   }
 
-  LoadMedia() {}
+  Future<List<Map<String,dynamic>>>LoadMedia() async{}
 }
