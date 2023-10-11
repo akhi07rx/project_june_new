@@ -100,5 +100,8 @@ class _FireMediaStorageState extends State<FireMediaStorage> {
     }
   }
 
-  Future<List<Map<String,dynamic>>>LoadMedia() async{}
+  Future<List<Map<String,dynamic>>>LoadMedia() async{
+    List<Map<String,dynamic>> images = [];
+    final ListResult result = await storage.ref().list();
+  }
 }
