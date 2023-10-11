@@ -60,7 +60,9 @@ class _FireMediaStorageState extends State<FireMediaStorage> {
               builder: (context,
                   AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
-                  return ListView.builder(itemBuilder: (itemCount: snapshot.data?.length??0, index) {});
+                  return ListView.builder(
+                      itemCount: snapshot.data?.length ?? 0,
+                      itemBuilder: (context, index) {});
                 }
               },
             ))
