@@ -74,6 +74,8 @@ dependencies:
   image_picker:
   path:
 
+  permission_handler:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
