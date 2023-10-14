@@ -19,5 +19,6 @@ class MovieProvider extends ChangeNotifier {
 
   void addtoWishList(Movies movieFromMainPage) {
     _wishListMovie.add(movieFromMainPage);
+    notifyListeners();
   }
 }
