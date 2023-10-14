@@ -8,4 +8,6 @@ final List<Movies> movieList = List.generate(
     (index) => Movies(
         title: 'Movie $index', time: '${Random().nextInt(100) + 60} minutes'));
 
-class MovieProvider extends ChangeNotifier {}
+class MovieProvider extends ChangeNotifier {
+  final List<Movies> _movie = movieList;
+}
