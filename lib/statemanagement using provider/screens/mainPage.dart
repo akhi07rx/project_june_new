@@ -7,9 +7,8 @@ class MovieMain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var
+    var wishmovies = context.watch<MovieProvider>().movieWishList;
     var movies = context.watch<MovieProvider>().movies;
-
     return Scaffold(
       appBar: AppBar(
         title: Text("Movies"),
@@ -21,11 +20,37 @@ class MovieMain extends StatelessWidget {
             icon: Icon(Icons.favorite_border),
             label: Text("Goto WishList"),
           ),
-          Expanded(child: ListView.builder(itemBuilder: (context, index) {
-            return Card(
-              child: ListTile(),
-            );
-          }))
+          Expanded(
+              child: ListView.builder(
+                  itemCount: movies.length,
+                  itemBuilder: (context, index) {
+                    //movies are list<map> here currentMovie is now a map
+                    final currentMovie = movies[index];
+                    return Card(
+                      child: ListTile(
+                        title: Text(currentMovie.title),
+                        subtitle: Text(currentMovie.time!),
+                        trailing: IconButton(
+                            onPressed: () {
+                              if (!wishmovies.contains(currentMovie)) {
+                                context
+                                    .read<MovieProvider>()
+                                    .addtoWishList(currentMovie);
+                              } else {
+                                context
+                                    .read<MovieProvider>()
+                                    .removeFromWishList(currentMovie);
+                              }
+                            },
+                            icon: Icon(
+                              Icons.favorite_border,
+                              color: wishmovies.contains(currentMovie)
+                                  ? Colors.red
+                                  : Colors.white,
+                            )),
+                      ),
+                    );
+                  }))
         ],
       ),
     );
