@@ -16,18 +16,20 @@ void main() async {
         messagingSenderId: '',
         storageBucket: "project-june-398208.appspot.com"),
   );
+
   runApp(MaterialApp(
-  home: FireMediaStorage(),
-  )
-  );
+    home: FireMediaStorage(),
+  ));
 }
 
 class FireMediaStorage extends StatefulWidget {
+  const FireMediaStorage({super.key});
+
   @override
-  State<StatefulWidget> createState() => _FireMediaStorageState();
+  State<FireMediaStorage> createState() => _FireMediaStorageState();
 }
 
-class _FireMediaStorageState extends State {
+class _FireMediaStorageState extends State<FireMediaStorage> {
   FirebaseStorage storage = FirebaseStorage.instance;
 
   @override
@@ -55,7 +57,7 @@ class _FireMediaStorageState extends State {
             ),
             Expanded(
                 child: FutureBuilder(
-                  // if firebase connection is success load data or media from firebase
+                    // if firebase connection is success load data or media from firebase
                     future: loadMedia(),
 
                     /// list of map images will be return here
@@ -67,7 +69,7 @@ class _FireMediaStorageState extends State {
                             itemBuilder: (context, index) {
                               /// each map value from list images stored in map image
                               final Map<String, dynamic> image =
-                              snapshot.data![index];
+                                  snapshot.data![index];
                               return Card(
                                 child: ListTile(
                                   leading: Image.network(image['imageurl']),
@@ -129,14 +131,14 @@ class _FireMediaStorageState extends State {
       final String fileUrl = await singlefile
           .getDownloadURL(); // to fetch image path(path as network image path)
       final FullMetadata metadata =
-      await singlefile.getMetadata(); // to fetch metadata from firebase
+          await singlefile.getMetadata(); // to fetch metadata from firebase
 
       images.add({
         'imageurl': fileUrl,
         'path': singlefile.fullPath,
         'uploadedBy': metadata.customMetadata?['uploadedBy'] ?? 'No Data',
         'description':
-        metadata.customMetadata?['description'] ?? 'No Description'
+            metadata.customMetadata?['description'] ?? 'No Description'
       });
     });
     return images;
