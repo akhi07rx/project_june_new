@@ -29,3 +29,4 @@ class MovieProvider extends ChangeNotifier {
     _wishListMovie.add(removedMovie);
     notifyListeners();
   }
+}
