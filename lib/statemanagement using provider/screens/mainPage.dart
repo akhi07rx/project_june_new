@@ -2,6 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:project_june1/statemanagement%20using%20provider/provider/movieProvider.dart';
 import 'package:provider/provider.dart';
 
+void main() {
+  runApp(ChangeNotifierProvider(
+    create: (BuildContext context) => MovieProvider(),
+    child: MaterialApp(
+      home: MovieMain(),
+    ),
+  ));
+}
+
 class MovieMain extends StatelessWidget {
   const MovieMain({super.key});
 
