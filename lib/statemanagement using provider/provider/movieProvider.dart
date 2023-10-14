@@ -10,4 +10,14 @@ final List<Movies> movieList = List.generate(
 
 class MovieProvider extends ChangeNotifier {
   final List<Movies> _movie = movieList;
+
+  List<Movies> get movies => _movie;
+
+  final List<Movies> _wishListMovie = [];
+
+  List<Movies> get movieWishList => _wishListMovie;
+
+  void addtoWishList(Movies movieFromMainPage) {
+    _wishListMovie.add(movieFromMainPage);
+  }
 }
